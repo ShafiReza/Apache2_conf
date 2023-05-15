@@ -1,39 +1,77 @@
-### sudo apt update
+```
+sudo apt update
+```
 #install the apache2 package:
-### sudo apt install apache2
+```
+sudo apt install apache2
+```
 #Adjusting the Firewall
-### sudo ufw app list
-### sudo ufw allow 'Apache'
-### sudo ufw status
+```
+sudo ufw app list
+```
+```
+sudo ufw allow 'Apache'
+```
+```
+sudo ufw status
+```
 # Checking your Web Server
-### sudo systemctl status apache2
+```
+sudo systemctl status apache2
+```
 #If you do not know your server’s IP address, you can get it a few different ways from the command line
-### hostname -I
+```
+hostname -I
+```
 #or
-###curl -4 icanhazip.com
+```
+curl -4 icanhazip.com
+```
 #Managing the Apache Process:
 #To stop your web server, run:
-### sudo systemctl stop apache2
+```
+sudo systemctl stop apache2
+```
 #To start the web server when it is stopped, run:
-### sudo systemctl start apache2
+```
+sudo systemctl start apache2
+```
 #To stop and then start the service again, run:
-### sudo systemctl restart apache2
+```
+sudo systemctl restart apache2
+```
 #If you are simply making configuration changes, Apache can often reload without dropping connections.
-### sudo systemctl reload apache2
+```
+sudo systemctl reload apache2
+```
 #By default, Apache is configured to start automatically when the server boots. If this is not what you want, disable this behavior by running
-### sudo systemctl disable apache2
+```
+sudo systemctl disable apache2
+```
 #To re-enable the service to start up at boot, run:
-### sudo systemctl enable apache2
+```
+sudo systemctl enable apache2
+```
 # Setting Up Virtual Hosts
-### sudo mkdir /var/www/your_domain
-###sudo chown -R $USER:$USER /var/www/your_domain
-###sudo chmod -R 755 /var/www/your_domain
-###sudo nano /var/www/your_domain/index.html
+```
+sudo mkdir /var/www/your_domain
+```
+```
+sudo chown -R $USER:$USER /var/www/your_domain
+```
+```
+sudo chmod -R 755 /var/www/your_domain
+```
+```
+sudo nano /var/www/your_domain/index.html
+```
 # Add some html text into the index.html
 #In order for Apache to serve this content, it’s necessary to create a virtual host file with the correct directives. Instead of modifying the default configuration file located at /etc/apache2/sites-available/000-default.conf directly, make a new one at /etc/apache2/sites-available/your_domain.conf:
-###sudo nano /etc/apache2/sites-available/your_domain.conf
+```
+sudo nano /etc/apache2/sites-available/your_domain.conf
+```
 #updated for your new directory and domain name:
-###
+```
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
     ServerName your_domain
@@ -42,12 +80,20 @@
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-###
+```
 #enable the file with the a2ensite tool:
-###sudo a2ensite your_domain.conf
+```
+sudo a2ensite your_domain.conf
+```
 #Disable the default site defined in 000-default.conf:
-###sudo a2dissite 000-default.conf
+```
+sudo a2dissite 000-default.conf
+```
 #test for configuration errors:
-###sudo apache2ctl configtest
+```
+sudo apache2ctl configtest
+```
 #Restart Apache to implement your changes:
-### sudo systemctl restart apache2
+```
+sudo systemctl restart apache2
+```
