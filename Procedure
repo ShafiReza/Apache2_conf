@@ -1,7 +1,9 @@
 ```
 sudo apt update
 ```
-#install the apache2 package:
+```
+##install the apache2 package:
+```
 ```
 sudo apt install apache2
 ```
